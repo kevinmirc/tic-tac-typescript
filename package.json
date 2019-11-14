@@ -1,15 +1,24 @@
 {
   "name": "tic-tac-typescript",
   "version": "0.0.1",
-  "description": "Typescript client library for building tic-tac-toe applications.",
+  "description": "Typescript SDK for handling tic-tac-toe in your application.",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "main": "index.js",
+  "main": "index.ts",
+  "public": true,
+  "engines": {
+    "node" : ">=7.0.0"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/kevinmirc/tic-tac-typescript"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
     "name": "Kevin Mircovich",
+    "email": "kmircovich1@gmail.com",
     "url": "https://kevinmircovich.com"
   },
   "dependencies": {

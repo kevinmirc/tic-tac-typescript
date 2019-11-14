@@ -1,5 +1,5 @@
 # Tic Tac Typescript
-A typescript library for handling tic-tac-toe in your application.
+A typescript SDK for handling tic-tac-toe in your application.
 
 # How it Works
 
