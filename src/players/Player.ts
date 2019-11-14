@@ -1,5 +1,5 @@
 import * as uuidv4 from 'uuid/v4';
-import { Game, GameBoardSpace } from './games';
+import { Game, GameBoardSpace } from '../games';
 
 export type GameEventHandler = (game: Game) => void;
 

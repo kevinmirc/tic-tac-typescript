@@ -1,4 +1,4 @@
-import { GameBoardSpace } from "./GameBoardSpace";
+import { GameBoardSpace } from './GameBoardSpace';
 
 export enum InvalidMoveConstrintKey {
     GAME_HAS_ENDED = 'gameHasEnded',

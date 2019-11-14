@@ -1,12 +1,16 @@
 # Tic Tac Typescript
 A typescript SDK for handling tic-tac-toe in your application.
 
+# Install
+- `npm install typescript`
+- `npm install tic-tac-typescript`
+
 # How it Works
 
 Here's a verbose example:
 
 ```ts
-import { Player, Game, GameBoardSpace } from '.';
+import { Player, Game, GameBoardSpace } from 'tic-tac-typescript';
 
 /**
  * Create a Player with the required `onMoveRequested` hook

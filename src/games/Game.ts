@@ -1,5 +1,5 @@
+import { Player } from '../players';
 import { GameBoardSpace } from './GameBoardSpace';
-import { Player } from '../Player';
 import { InvalidMoveConstrintKey, InvalidMoveError } from './InvalidMoveError';
 
 interface PlayerMove {

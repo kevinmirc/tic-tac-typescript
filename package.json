@@ -1,20 +1,26 @@
 {
   "name": "tic-tac-typescript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Typescript SDK for handling tic-tac-toe in your application.",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "public": true,
+  "files": [
+    "dist/**/*"
+  ],
   "engines": {
-    "node" : ">=7.0.0"
+    "node": ">=7.0.0"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/kevinmirc/tic-tac-typescript"
+    "type": "git",
+    "url": "https://github.com/kevinmirc/tic-tac-typescript"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "build": "node_modules/.bin/tsc --outDir dist/ -t ES5 -d src/**/* src/index.ts",
+    "prepublish": "npm run clean && npm run build"
   },
   "author": {
     "name": "Kevin Mircovich",

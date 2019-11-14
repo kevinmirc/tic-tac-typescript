@@ -1,5 +1,4 @@
-import { Game, GameBoardSpace, Player } from '../';
-import { InvalidMoveError, InvalidMoveConstrintKey } from '../src/games';
+import { Game, GameBoardSpace, Player, InvalidMoveError } from '../';
 
 const player1 = new Player({
     onMoveRequested: function (game: Game) {
