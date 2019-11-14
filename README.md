@@ -1,11 +1,11 @@
 # Tic Tac Typescript
 A typescript SDK for handling tic-tac-toe in your application.
 
-# Install
+## Install
 - `npm install typescript`
 - `npm install tic-tac-typescript`
 
-# How it Works
+## How it Works
 
 Here's a verbose example:
 
@@ -71,7 +71,7 @@ const player2 = new Player({
             game.winner === null ? `It's a Tie` : `Winner is ${game.winner.id}`
         );
 
-        console.info('Winning Line', game.winningVector);
+        console.info('Winning Line', game.winningVector); // ['A3', 'B2', 'C1']
     },
 });
 
@@ -84,5 +84,5 @@ const game = new Game(player1, player2);
 game.start();
 ```
 
-# Examples
+## Examples
 See examples in the [Examples Directory](./examples).
