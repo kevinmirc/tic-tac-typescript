@@ -259,7 +259,9 @@ export class Game {
     private endGame() {
         // broadcast that the game has ended
         [this.player1, this.player2].forEach((player) => {
-            player.onGameEnded(this);
+            if (player.onGameEnded) {
+                player.onGameEnded(this);
+            }
         });
     }
 }
