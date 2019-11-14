@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-typescript",
+  "version": "0.0.1",
+  "description": "Typescript client library for building tic-tac-toe applications.",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Kevin Mircovich",
+    "url": "https://kevinmircovich.com"
+  },
+  "dependencies": {
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.6",
+    "ts-node": "^8.5.0",
+    "typescript": "^3.7.2"
+  }
+}
