@@ -14,10 +14,15 @@ export interface InvalidMoveConstrintItem {
 export type InvalidMoveConstrints = Partial<Record<InvalidMoveConstrintKey, InvalidMoveConstrintItem>>;
 
 export class InvalidMoveError extends Error {
-    constructor(errors: InvalidMoveConstrints) {
-        super('This is an invalid move.');
-        this.errors = errors;
-    }
-
+    
+    name = 'InvalidMoveError';
     errors: InvalidMoveConstrints;
+
+    constructor(constraints: InvalidMoveConstrints) {
+        super('This is an invalid move.');
+
+        Object.setPrototypeOf(this, InvalidMoveError.prototype);
+
+        this.errors = constraints;
+    }
 }
