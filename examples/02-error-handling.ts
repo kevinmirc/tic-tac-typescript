@@ -1,4 +1,4 @@
-import { Game, GameBoardSpace, Player, InvalidMoveError } from '../';
+import { Game, GameBoardSpace, Player, InvalidMoveError } from '../src';
 
 const player1 = new Player({
     onMoveRequested: function (game: Game) {
@@ -16,9 +16,11 @@ const player2 = new Player({
                     const constraint = e.errors[constaintName];
                     console.warn(constraint.message);
                 }
+
+                return this.onMoveRequested(game);
             }
 
-            this.makeMove(game, game.availableSpaces[0]);
+            throw e;
         }
     },
 });
