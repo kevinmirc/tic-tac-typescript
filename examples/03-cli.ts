@@ -11,6 +11,7 @@ const player1 = new Player({
 const player2 = new Player({
     onMoveRequested: function (game: Game) {
         printBoard.call(this, game);
+
         promptUser.call(this, game, (propmtError, result) => {
             if (propmtError) {
                 console.error(propmtError.message);
@@ -29,24 +30,8 @@ const player2 = new Player({
         });
     },
     onGameEnded: function(game: Game) {
-        let endGameMessage: string;
-
         printBoard.call(this, game);
-
-        if (game.winner === null) {
-            endGameMessage = colors.yellow('...It\'s a Tie /:');
-        } else if (game.winner.id === this.id) {
-            endGameMessage = colors.green('You Win!!!');
-        } else if (game.winner.id === game.getOpponent(this.id).id) {
-            endGameMessage = colors.red('You Lost...');
-        } else {
-            endGameMessage = [
-                colors.red('error') + ':\t',
-                'Could not identify winner',
-            ].join('');   
-        }
-
-        console.info(endGameMessage, '\n');
+        printEndGameMessage.call(this, game);
     },
 });
 
@@ -108,6 +93,25 @@ function handleInvalidMoveError(e: InvalidMoveError) {
     }
 
     this.onMoveRequested(game);
+}
+
+function printEndGameMessage(game: Game) {
+    let endGameMessage: string;
+
+    if (game.winner === null) {
+        endGameMessage = colors.yellow('It\'s a Tie... ');
+    } else if (game.winner.id === this.id) {
+        endGameMessage = colors.green('You Win!!!');
+    } else if (game.winner.id === game.getOpponent(this.id).id) {
+        endGameMessage = colors.red('You Lost...');
+    } else {
+        endGameMessage = [
+            colors.red('error') + ':\t',
+            'Could not identify winner',
+        ].join('');   
+    }
+
+    console.info(endGameMessage, '\n');
 }
 
 const game = new Game(player1, player2);
