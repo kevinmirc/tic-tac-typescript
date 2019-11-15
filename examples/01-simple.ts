@@ -13,5 +13,4 @@ const player2 = new Player({
 });
 
 const game = new Game(player1, player2);
-
 game.start();

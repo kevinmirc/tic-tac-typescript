@@ -16,7 +16,7 @@ export class Player {
         this.onGameStateChanged = hooks.onGameStateChanged ? hooks.onGameStateChanged : undefined;
     }
 
-    private makeMove(game: Game, selectedMove: GameBoardSpace) {
+    protected makeMove(game: Game, selectedMove: GameBoardSpace) {
         return game.registerMove(this.id, selectedMove);
     }
 }
