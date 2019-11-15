@@ -4,6 +4,7 @@ export enum InvalidMoveConstrintKey {
     GAME_HAS_ENDED = 'gameHasEnded',
     NOT_YOUR_TURN = 'notYourTurn',
     SPACE_IS_TAKEN = 'spaceIsTaken',
+    SPACE_DOES_NOT_EXIST = 'spaceDoesNotExist'
 }
 
 export interface InvalidMoveConstrintItem {

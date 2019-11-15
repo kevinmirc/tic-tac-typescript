@@ -107,6 +107,18 @@ export class Game {
         return !!this.moves.find(move => move.space === targetSpace);
     }
 
+    getMarkerForSpace(targetSpace: GameBoardSpace) {
+        const foundMove = this.moves.find(move => move.space === targetSpace);
+        if (foundMove) {
+            const marker = foundMove.playerId === this.player1.id ? 'X' : 'O';
+            return marker;
+        }
+    }
+
+    getOpponent(playerId: string) {
+        return playerId === this.player1.id ? this.player2 : this.player1;
+    }
+
     /**
      * Instance Methods (private)
      */
@@ -124,19 +136,30 @@ export class Game {
 
         const errors = {};
 
-        // Check if the game has previously ended
+        // If the game has previously ended
         if (!(this.winner === undefined)) {
             errors[InvalidMoveConstrintKey.GAME_HAS_ENDED] = buildErrorObject(
                 'This game has already ended',
             );
         }
 
+        // TODO: If this player is not in this game
+
+        // If this is not this players turn
         if (this.lastMove && this.lastMove.playerId === playerId) {
             errors[InvalidMoveConstrintKey.NOT_YOUR_TURN] = buildErrorObject(
                 'It is not your turn.',
             );
         }
 
+        // If the space provided is not a sapce that exists on the board
+        if (Object.values(GameBoardSpace).indexOf(selectedSpace) === -1) {
+            errors[InvalidMoveConstrintKey.SPACE_DOES_NOT_EXIST] = buildErrorObject(
+                'This is not a valid space.',
+            );
+        }
+
+        // If this space is already taken
         if (this.isSpaceTaken(selectedSpace)) {
             errors[InvalidMoveConstrintKey.SPACE_IS_TAKEN] = buildErrorObject(
                 'This space is not available.',

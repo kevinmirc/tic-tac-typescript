@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@types/uuid": "^3.4.6",
+    "prompt": "^1.0.0",
     "ts-node": "^8.5.0",
     "typescript": "^3.7.2"
   }
