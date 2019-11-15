@@ -1,4 +1,4 @@
-import { Game, Player } from '../';
+import { Game, Player } from '../src';
 
 const player1 = new Player({
     onMoveRequested: function (game: Game) {

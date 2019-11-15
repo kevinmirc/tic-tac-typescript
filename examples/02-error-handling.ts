@@ -17,7 +17,7 @@ const player2 = new Player({
                     console.warn(constraint.message);
                 }
 
-                return this.onMoveRequested(game);
+                return this.makeMove(game, game.availableSpaces[0]);
             }
 
             throw e;
