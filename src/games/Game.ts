@@ -9,26 +9,20 @@ interface PlayerMove {
 
 export class Game {
 
+    static centerSpace = GameBoardSpace.B2;
+    static cornerSpaces = [ GameBoardSpace.A1, GameBoardSpace.A3, GameBoardSpace.C1, GameBoardSpace.C3];
+    static edgeSpaces = [ GameBoardSpace.A2, GameBoardSpace.B3, GameBoardSpace.C2, GameBoardSpace.B1];
+
     static spaceIsEdge(space: GameBoardSpace) {
-        return [
-            GameBoardSpace.A2,
-            GameBoardSpace.B1,
-            GameBoardSpace.B3,
-            GameBoardSpace.B2,
-        ].indexOf(space) > -1;
+        return !!Game.edgeSpaces.find(s => s === space);
     }
 
     static spaceIsCorner(space: GameBoardSpace) {
-        return [
-            GameBoardSpace.A1,
-            GameBoardSpace.A3,
-            GameBoardSpace.C1,
-            GameBoardSpace.C3,
-        ].indexOf(space) > -1;
+        return !!Game.cornerSpaces.find(s => s === space);
     }
 
     static spaceIsCenter(space: GameBoardSpace) {
-        return GameBoardSpace.B2 === space;
+        return Game.centerSpace === space;
     }
 
     readonly moves: PlayerMove[] = [];
@@ -63,15 +57,20 @@ export class Game {
      * Returns a list of GameBoardSpaces that have not yet been taken by a player.
      */
     get availableSpaces() {
-        const allPossibleMoves = Object.values(GameBoardSpace).splice(0);
+        const allPossibleSpaces = Object.values(GameBoardSpace).splice(0);
 
-        return allPossibleMoves.reduce((availableMoves: GameBoardSpace[], gameBoardSpace: GameBoardSpace) => {
-            if (this.takenSpaces.indexOf(gameBoardSpace) === -1) {
-                availableMoves.push(gameBoardSpace);
-            }
+        console.log('avail spaces', allPossibleSpaces.filter(space => this.takenSpaces.indexOf(space) === -1));
+        return allPossibleSpaces.filter(space => !this.isSpaceTaken(space));
+    }
 
-            return availableMoves;
-        }, []);
+    get availableCornerSpaces() {
+        const allPossibleSpaces = Object.values(GameBoardSpace).splice(0);
+        return allPossibleSpaces.filter(space => Game.spaceIsCorner(space) && this.takenSpaces.indexOf(space) === -1);
+    }
+
+    get availableEdgeSpaces() {
+        const allPossibleSpaces = Object.values(GameBoardSpace).splice(0);
+        return allPossibleSpaces.filter(space => Game.spaceIsEdge(space) && this.takenSpaces.indexOf(space) === -1);
     }
 
     get lastMove() {
@@ -85,6 +84,8 @@ export class Game {
 
     start() {
         this.promptNextPlayer();
+
+        return this;
     }
 
     registerMove(playerId: string, selectedSpace: GameBoardSpace) {
@@ -115,7 +116,7 @@ export class Game {
         }
     }
 
-    getOpponent(playerId: string) {
+    getOpposingPlayerOf(playerId: string) {
         return playerId === this.player1.id ? this.player2 : this.player1;
     }
 
@@ -143,7 +144,7 @@ export class Game {
             );
         }
 
-        // TODO: If this player is not in this game
+        // TODO: If the player is not in this game?
 
         // If this is not this players turn
         if (this.lastMove && this.lastMove.playerId === playerId) {
@@ -190,7 +191,7 @@ export class Game {
     }
 
     private isCompleted() {
-        // If a winner has already been declaired, or a tie has already occured (winner === null)
+        // If a winner has already been declaired, or a tie has already occured
         if (this.winner || this.winner === null) { 
             return true
         }
@@ -211,12 +212,11 @@ export class Game {
         }
 
         // If nine moves have been made, we've reached the end of the game
-        if (this.moveCount === 9) {
+        if (this.moveCount > 8) {
             this._winner = null;
             return true;
         }
 
-        // TODO: check if someone won or if it was a tie.
         return false;
     }
 

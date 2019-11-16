@@ -109,12 +109,13 @@ export class CliPlayer extends Player {
 
     printEndGameMessage(game: Game) {
         let endGameMessage: string;
+        const opposingPlayerId = game.getOpposingPlayerOf(this.id).id;
     
         if (game.winner === null) {
             endGameMessage = colors.yellow('It\'s a Tie... ');
         } else if (game.winner.id === this.id) {
             endGameMessage = colors.green('You Win!!!');
-        } else if (game.winner.id === game.getOpponent(this.id).id) {
+        } else if (game.winner.id === opposingPlayerId) {
             endGameMessage = colors.red('You Lost...');
         } else {
             endGameMessage = [
