@@ -10,10 +10,14 @@ export class Player {
     onGameEnded?: GameEventHandler;
     onGameStateChanged?: GameEventHandler;
 
+    /**
+     * Register hooks that handle the state changes of the games this player participates in.
+     * NOTE: The hooks' `this` will bound to the created Player instance.
+     */
     constructor(hooks: { onMoveRequested: GameEventHandler, onGameEnded?: GameEventHandler, onGameStateChanged?: GameEventHandler }) {
-        this.onMoveRequested = hooks.onMoveRequested; // TODO: Add support for arrow functions can also be asssiged (bind this OR wrap function and use .call())
-        this.onGameEnded = hooks.onGameEnded ? hooks.onGameEnded : undefined; // TODO: Add support for arrow functions can also be asssiged (bind this OR wrap function and use .call())
-        this.onGameStateChanged = hooks.onGameStateChanged ? hooks.onGameStateChanged : undefined;
+        this.onMoveRequested = hooks.onMoveRequested.bind(this);
+        this.onGameEnded = hooks.onGameEnded ? hooks.onGameEnded.bind(this) : undefined;
+        this.onGameStateChanged = hooks.onGameStateChanged ? hooks.onGameStateChanged.bind(this) : undefined;
     }
 
     protected makeMove(game: Game, selectedMove: GameBoardSpace) {
