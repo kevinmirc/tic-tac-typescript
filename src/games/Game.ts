@@ -58,8 +58,6 @@ export class Game {
      */
     get availableSpaces() {
         const allPossibleSpaces = Object.values(GameBoardSpace).splice(0);
-
-        console.log('avail spaces', allPossibleSpaces.filter(space => this.takenSpaces.indexOf(space) === -1));
         return allPossibleSpaces.filter(space => !this.isSpaceTaken(space));
     }
 
