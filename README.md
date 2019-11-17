@@ -1,8 +1,6 @@
 # Tic Tac Typescript
 A Typescript SDK for handling tic-tac-toe in your application.
 
-Available for ES5 and above.
-
 ## Install
 - `npm install typescript`
 - `npm install tic-tac-typescript`
