@@ -1,5 +1,7 @@
 # Tic Tac Typescript
-A typescript SDK for handling tic-tac-toe in your application.
+A Javascript SDK for handling tic-tac-toe in your application.
+
+Available for ES5 and above.
 
 ## Install
 - `npm install typescript`
@@ -19,7 +21,7 @@ const player1 = new Player({
 
     /**
      * When the game has started, and it's this players turn, the game will
-     * call this player's`onMoveRequested` hook.
+     * call this player's `onMoveRequested` hook.
      * 
      * The game argument exposes properties and methods about the state of the game
      * which you can incorportate into the logic for selecting a space.
@@ -27,8 +29,8 @@ const player1 = new Player({
     onMoveRequested: function (game: Game) {
 
         /**
-         * In this case we'll just chose the first available space.
-         * Once we're ready to make a move, we call `this.makeMove()`.
+         * In this case we'll just choose the first available space.
+         * Once we're ready to take a space, we call `this.makeMove()`.
          */
         this.makeMove(game, game.availableSpaces[0]);
     },
@@ -52,6 +54,7 @@ const player2 = new Player({
 
             /**
              * The game will throw a InvalidMoveError whenever a player makes an invalid move.
+             * 
              * In this case:
              * e = { errors: { spaceIsTaken: { message: (human readable string), space: 'A1' } }
              */
@@ -71,7 +74,9 @@ const player2 = new Player({
             game.winner === null ? `It's a Tie` : `Winner is ${game.winner.id}`
         );
 
-        console.info('Winning Line', game.winningVector); // ['A3', 'B2', 'C1']
+        if (game.winner) {
+            console.info('Winning Line', game.winningVector); // ['A3', 'B2', 'C1']
+        }
     },
 });
 
@@ -84,5 +89,16 @@ const game = new Game(player1, player2);
 game.start();
 ```
 
-## Examples
-See examples in the [Examples Directory](./examples).
+### More Examples
+See more implementation examples in the [Examples Directory](./examples).
+
+## Play The Undefeated Computer!
+[Example 04](./examples/04-undefeated-computer) features a computer that cannot lose a game of Tic-Tac-Toe. You can play the computer in the CLI by cloning this repo and executing the script in the example.
+
+- Make sure your machine has node installed (version >=7) `node -v`. See [nvm](https://github.com/nvm-sh/nvm) if needed.
+- Clone the repo: `git clone https://github.com/kevinmirc/tic-tac-typescript.git`
+- Change dir to repo: `cd tic-tac-typescript/`
+- Install dependencies `npm i`
+- Install typescript `npm i typescript`
+- Run the npm script `npm run game`. This will start a match between you and the undefeated computer.
+- [optional] You can execute other example implementations by executing the file with ts-node `node_modules/.bin/ts-node examples/03-cli-vs-computer.ts`. This will start a CLI Match with you vs a (defeatable) computer.
