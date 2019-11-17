@@ -1,5 +1,5 @@
 # Tic Tac Typescript
-A Javascript SDK for handling tic-tac-toe in your application.
+A Typescript SDK for handling tic-tac-toe in your application.
 
 Available for ES5 and above.
 
