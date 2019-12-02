@@ -1,6 +1,6 @@
 {
   "name": "tic-tac-typescript",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Typescript SDK for handling tic-tac-toe in your application.",
   "license": "MIT",
   "readmeFilename": "README.md",
