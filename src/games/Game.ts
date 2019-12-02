@@ -1,3 +1,4 @@
+import * as uuidv4 from 'uuid/v4';
 import { Player } from '../players';
 import { GameBoardSpace } from './GameBoardSpace';
 import { InvalidMoveConstrintKey, InvalidMoveError } from './InvalidMoveError';
@@ -26,6 +27,8 @@ export class Game {
     }
 
     readonly moves: PlayerMove[] = [];
+    readonly id: string;
+
     private _winner: Player | null = undefined; // null is a tie, undefined means no winner has been set
     private _winningVector: GameBoardSpace[]; // ['A1', 'A2', 'A3']
     readonly player1: Player;
@@ -75,15 +78,25 @@ export class Game {
         return this.moves[this.moves.length - 1];
     }
 
-    constructor(player1: Player, player2: Player) {
+    constructor(player1: Player, player2: Player, id?: string, moves?: PlayerMove[]) {
         this.player1 = player1;
         this.player2 = player2;
+        this.id = id || uuidv4();
+        this.moves = moves || [];
     }
 
     start() {
         this.promptNextPlayer();
 
         return this;
+    }
+
+    promptNextPlayer() {
+        const initiatedUser = this.moveCount % 2 ? this.player2 : this.player1;
+
+        if (initiatedUser.onMoveRequested) {
+            initiatedUser.onMoveRequested(this);
+        }
     }
 
     registerMove(playerId: string, selectedSpace: GameBoardSpace) {
@@ -121,10 +134,6 @@ export class Game {
     /**
      * Instance Methods (private)
      */
-    private promptNextPlayer() {
-        const initiatedUser = this.moveCount % 2 ? this.player2 : this.player1;
-        initiatedUser.onMoveRequested(this);
-    }
 
     // Order of validations matter!
     private assertValidMove(playerId: string, selectedSpace: GameBoardSpace) {
